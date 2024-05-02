@@ -1,0 +1,45 @@
+<div class="form-container">
+    <button class="button" routerLink="../prestamo-list">Ver Prestamos</button><br><br>
+    <button class="button" routerLink="../prestamo-id">Consultar Prestamo ID</button><br><br>
+    <button class="button" (click)="logout()">Logout</button>
+</div>
+
+<div class="form-container">
+
+  <form [formGroup]="prestamoForm" (ngSubmit)="onSubmit()">
+    <div class="input-container">
+        <label for="isbn">ISBN:</label>
+        <input type="text" formControlName="isbn" id="isbn">
+        <div *ngIf="prestamoForm.get('isbn')?.invalid && prestamoForm.get('isbn')?.touched" class="error-message">
+        ISBN es requerido y debe tener como máximo 10 caracteres.
+        </div>
+    </div>
+  
+    <div class="input-container">
+        <label for="identiUsuario">Identificación de Usuario:</label>
+        <input type="text" formControlName="identiUsuario" id="identiUsuario">
+        <div *ngIf="prestamoForm.get('identiUsuario')?.invalid && prestamoForm.get('identiUsuario')?.touched" class="error-message">
+        Identificación de Usuario es requerida y debe tener como máximo 10 caracteres.
+        </div>
+    </div>
+  
+    <div class="input-container">
+        <label for="tipoUsuario">Tipo de Usuario:</label>
+        <select formControlName="tipoUsuario" id="tipoUsuario">
+        <option value="" disabled selected>Selecciona un tipo de usuario</option>
+        <option value="1">Afilado</option>
+        <option value="2">Empleado de la biblioteca</option>
+        <option value="3">Invitado</option>
+        </select>
+        <div *ngIf="prestamoForm.get('tipoUsuario')?.invalid && prestamoForm.get('tipoUsuario')?.touched" class="error-message">
+        Tipo de Usuario es requerido.
+        </div>
+    </div>
+  
+    <button type="submit" class="button" [disabled]="prestamoForm.invalid">Crear Préstamo</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="responseMessage" class="success-message">{{ responseMessage }}</div>
+
+</div>
