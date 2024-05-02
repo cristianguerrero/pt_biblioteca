@@ -1,0 +1,26 @@
+<div class="form-container">
+    <button class="button" routerLink="../prestamo-form">Crear Prestamo</button><br><br>
+    <button class="button" routerLink="../prestamo-list">Ver Prestamos</button><br><br>
+    <button class="button" (click)="logout()">Logout</button>
+</div>
+
+<div class="form-container">
+
+    <div class="input-container">
+        <label for="prestamoIdInput">ID del Préstamo:</label>
+        <input type="number" id="prestamoIdInput" [(ngModel)]="prestamoId" name="prestamoId" required>
+    </div>
+        
+    <button class="button" (click)="consultarPrestamo()">Consultar Prestamo</button>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    
+    <div *ngIf="prestamo">
+        <h3>Detalles del Préstamo (ID: {{ prestamo.id }})</h3>
+        <p><strong>ISBN:</strong> {{ prestamo.isbn }}</p>
+        <p><strong>Identificación Usuario:</strong> {{ prestamo.identificacionUsuario }}</p>
+        <p><strong>Tipo Usuario:</strong> {{ prestamo.tipoUsuario }}</p>
+        <p><strong>Fecha Máxima de Devolución:</strong> {{ prestamo.fechaMaximaDevolucion | date:'dd/MM/yyyy' }}</p>
+    </div>
+  
+</div>
